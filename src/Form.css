@@ -1,0 +1,24 @@
+input {
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px;
+    width: 200px;
+    border: 2px solid blue;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    width: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+.form-signUp p {
+    color: red;
+    margin-top: 0;
+    font-weight: bold;
+}

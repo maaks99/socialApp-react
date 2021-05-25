@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './FormLogin.css';
+import './Form.css';
 
 
 const FormLogin = (props) => {
@@ -10,9 +10,9 @@ const FormLogin = (props) => {
             <form>
                 <h2>Log in</h2>
                 <input type="text" placeholder="Username"/>
-                <input type="text" placeholder="Password"/>
+                <input type="password" placeholder="Password"/>
                 <button type="submit">LOG IN</button>
-                <p>Don't have an account? Sign up now!</p>
+                <p>Don't have an account? <a href="#">Sign up now!</a></p>
             </form>
         </div>
     )
