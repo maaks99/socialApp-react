@@ -6,8 +6,7 @@ import {
     Link
 } from "react-router-dom";
 import FormLogin from './FormLogin';
-import FormSignUp from './FormSignUp';
-
+import FormSignUp from './FormSignUp'
 import './MainMenu.css';
 
 const MainMenu = (props) => {
@@ -21,9 +20,6 @@ const MainMenu = (props) => {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/feed">Feed</Link>
-                        </li>
-                        <li>
                             <Link to="/login">Login</Link>
                         </li>
                         <li>
@@ -34,9 +30,6 @@ const MainMenu = (props) => {
                 <Switch>
                     <Route path="/login">
                         <FormLogin />
-                    </Route>
-                    <Route path="/feed">
-                        <Feed />
                     </Route>
                     <Route path="/signup">
                         <FormSignUp />

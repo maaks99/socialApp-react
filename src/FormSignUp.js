@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css';
 import axios from 'axios';
+import {useForm} from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 const FormSignUp = (props) => {
 
@@ -14,6 +18,11 @@ const FormSignUp = (props) => {
 
     const [errors, setErrors] = useState({})
     
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleshowPassword = () => {
+        setShowPassword(showPassword ? false : true);
+    }
 
     
     const handleChange = (e) => {
@@ -40,21 +49,23 @@ const FormSignUp = (props) => {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
-
+        
+        if (Object.keys(validate(values)).length) return;
         
 
         axios.post('http://akademia108.pl/api/social-app/user/signup', JSON.stringify(newUser),{ 'headers': headers })
         .then((req) => {
-
+                
             if(req.data.signedup === true) {
                 console.log(req.data);
             }else {
-                console.log(req.data.message);
+                console.log(req.data);
             }
-                 
+                  
         }).catch((error) => {
             console.error(error);
-        })
+         })
+        
     }
 
     const validate = (values) => {
@@ -93,7 +104,7 @@ const FormSignUp = (props) => {
 
     return (
         <div>
-            <form className="form-signUp" onSubmit={handleSubmit} >
+            <form className="forms" onSubmit={handleSubmit} >
                 <h2>Sign Up</h2>
                 <input
                     name="username"
@@ -101,6 +112,7 @@ const FormSignUp = (props) => {
                     placeholder="Username"
                     value={values.username}
                     onChange={handleChange}
+                    
                 />
                 {errors.username && <p>{errors.username}</p>}
                 <input
@@ -113,20 +125,22 @@ const FormSignUp = (props) => {
                 {errors.email && <p>{errors.email}</p>}
                 <input
                     name="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="input"
                     value={values.password}
                     onChange={handleChange}
                 />
+                <i onClick={toggleshowPassword} className="eyeSign">{eye}</i>
                 {errors.password && <p>{errors.password}</p>}
                 <input
                     name="password2"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Confirm password"
                     value={values.password2}
                     onChange={handleChange}
                 />
+                <i onClick={toggleshowPassword} className="eyeSign2">{eye}</i>
                 {errors.password2 && <p>{errors.password2}</p>}
                 <button type="submit">SIGN UP</button>
             </form>

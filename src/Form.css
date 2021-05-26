@@ -17,8 +17,35 @@ button {
     cursor: pointer;
 }
 
-.form-signUp p {
+.forms p {
     color: red;
     margin-top: 0;
     font-weight: bold;
+}
+
+.forms .createAccount {
+    color: black;
+}
+
+.eyeSign {
+    position: absolute;
+    left: 200px;
+    top: 247px;
+}
+
+.eyeSign2 {
+    position: absolute;
+    left: 200px;
+    top: 292px;  
+}
+
+.eyeLogin {
+    position: absolute;
+    left: 200px;
+    top: 203px;
+}
+
+.eyeSign:hover, .eyeSign2:hover, .eyeLogin:hover {
+    cursor: pointer;
+    color: grey;
 }
