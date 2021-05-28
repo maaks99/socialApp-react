@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import FormSignUp from './FormSignUp';
 import './Form.css';
 import {
-    Link
+    Link, Redirect
 } from "react-router-dom";
 import axios from 'axios';
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
@@ -21,6 +21,7 @@ const FormLogin = (props) => {
 
     const [showPassword, setShowPassword] = useState(false);
 
+    const [loggedin, setloggedin] = useState(false);
 
     const toggleshowPassword = () => {
         setShowPassword(showPassword ? false : true);
@@ -50,11 +51,14 @@ const FormLogin = (props) => {
         };
 
 
-        axios.post('https://akademia108.pl/api/social-app/user/login', JSON.stringify(newUser), {headers: headers})
+        axios.post('https://akademia108.pl/api/social-app/user/login', JSON.stringify(newUser), { headers: headers })
             .then((req) => {
                 localStorage.setItem('token', JSON.stringify(req.data.jwt_token));
                 console.log(req.data);
-                
+                if (req.data.error === false) {
+                    setloggedin(true);
+                }
+
             })
             .catch((error) => {
                 console.log(error);
@@ -75,25 +79,31 @@ const FormLogin = (props) => {
 
     return (
         <div>
+            {loggedin && <Redirect to="/" />}
             <form className="forms" onSubmit={submitForm}>
                 <h2>Log in</h2>
-                <input
-                    type= "text"
-                    placeholder="Username"
-                    name="username"
-                    value={values.username}
-                    onChange={handleChange}
-                />
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        name="username"
+                        value={values.username}
+                        onChange={handleChange}
+                    />
+                </div>
                 {errors.username && <p>{errors.username}</p>}
-                <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                />
-                <i onClick={toggleshowPassword} className="eyeLogin">{eye}</i>
+                <div className="password">
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Password"
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange}
+                    />
+                    <i onClick={toggleshowPassword} className="eyeLogin">{eye}</i>
+                </div>
                 {errors.password && <p>{errors.password}</p>}
+
                 <button type="submit">LOG IN</button>
                 <p className="createAccount">Don't have an account? <Link to="/signup">Sign Up now!</Link></p>
             </form>

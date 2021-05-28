@@ -26,26 +26,28 @@ button {
 .forms .createAccount {
     color: black;
 }
-
-.eyeSign {
-    position: absolute;
-    left: 200px;
-    top: 247px;
+.password, .password2 {
+    height: 44px;
+}
+.password .eyeSign {
+    position: relative;
+    left: 200px ;
+    bottom: 35px;
 }
 
-.eyeSign2 {
-    position: absolute;
+.password2 .eyeSign2 {
+    position: relative;
     left: 200px;
-    top: 292px;  
+    bottom: 35px;
 }
 
 .eyeLogin {
-    position: absolute;
+    position: relative;
     left: 200px;
-    top: 203px;
+    bottom: 35px;
 }
 
-.eyeSign:hover, .eyeSign2:hover, .eyeLogin:hover {
+.password .eyeSign:hover, .password2 .eyeSign2:hover, .eyeLogin:hover {
     cursor: pointer;
     color: grey;
 }
