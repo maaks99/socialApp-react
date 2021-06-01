@@ -53,7 +53,9 @@ const FormLogin = (props) => {
 
         axios.post('https://akademia108.pl/api/social-app/user/login', JSON.stringify(newUser), { headers: headers })
             .then((req) => {
-                localStorage.setItem('token', JSON.stringify(req.data.jwt_token));
+                localStorage.setItem('user', JSON.stringify(req.data));
+
+                props.setCurrentUser(req.data);
                 console.log(req.data);
                 if (req.data.error === false) {
                     setloggedin(true);
